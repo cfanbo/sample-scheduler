@@ -1,0 +1,21 @@
+# test-scheduler.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-scheduler
+spec:
+  selector:
+    matchLabels:
+      app: test-scheduler
+  template:
+    metadata:
+      labels:
+        app: test-scheduler
+    spec:
+      schedulerName: sample-scheduler # 指定使用的调度器，不指定使用默认的default-scheduler
+      containers:
+        - image: nginx:1.23-alpine
+          imagePullPolicy: IfNotPresent
+          name: nginx
+          ports:
+            - containerPort: 80
